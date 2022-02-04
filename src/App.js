@@ -1,14 +1,9 @@
 import React from 'react';
-import './App.scss'
+import IndexRouter from './router/IndexRouter';
 
 export default function App() {
   return <div>
-    <ul>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-    </ul>
+    <IndexRouter />
   </div>;
 }
 
