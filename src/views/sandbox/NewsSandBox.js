@@ -19,6 +19,7 @@ export default function NewsSandBox() {
                 <Route path='/right-manage/role/list' element={<RoleList />}/>
                 <Route path='/right-manage/right/list' element={<RightList />}/>
                 <Route path='*' element={<Navigate to='/login' />} />
+                <Route path='/' element={<Navigate replace to='/home'/>} />
             </Routes>
       </div>
       
