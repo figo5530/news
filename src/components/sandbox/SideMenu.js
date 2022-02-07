@@ -5,7 +5,9 @@ import {
   SettingOutlined
 } from '@ant-design/icons';
 import './SideMenu.css'
+import { useNavigate } from 'react-router-dom'
 import MenuItem from 'antd/lib/menu/MenuItem';
+
 const { Sider } = Layout
 const { SubMenu } = Menu
 const menuList = [
@@ -45,7 +47,8 @@ const menuList = [
   }
 ]
 
-export default function SideMenu() {
+function SideMenu(props) {
+  let navigate = useNavigate()
   const renderMenu = (list) => {
     return list.map(item => {
       if(item.children) {
@@ -53,11 +56,13 @@ export default function SideMenu() {
                   {renderMenu(item.children)}
               </SubMenu>
       }else {
-        return <MenuItem key={item.key} icon={item.icon}>{item.title}</MenuItem>
+        return <MenuItem key={item.key} icon={item.icon} onClick={() => {
+          navigate(item.key)
+        }}>{item.title}</MenuItem>
       }
     })
   }
-  
+
   return (
     <Sider trigger={null} collapsible collapsed={false}>
     <div className="logo">News System</div>
@@ -67,3 +72,4 @@ export default function SideMenu() {
   </Sider>
   )
 }
+export default SideMenu
