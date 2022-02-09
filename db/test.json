@@ -1,0 +1,8 @@
+{
+    "post": [
+        {"id" : 1, "title" :"1111", "author" :"figo"}
+    ],
+    "comments": [
+        {"id" : 1, "body" :"comeon", "postId" : 1}
+    ]
+}
