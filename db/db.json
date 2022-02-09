@@ -1,0 +1,199 @@
+{
+    "rights": [
+        {
+            "id" : 1,
+            "title" : "Home",
+            "key" : "/home",
+            "pagepermission" : 1,
+            "grade" : 1
+        },
+        {
+            "id" : 2,
+            "title" : "User Management",
+            "key" : "/user-manage",
+            "pagepermission" : 1,
+            "grade" : 1
+        },
+        {
+            "id" : 7,
+            "title" : "Right Management",
+            "key" : "/right-manage",
+            "pagepermission" : 1,
+            "grade" : 1
+        },
+        {
+            "id" : 14,
+            "title" : "News Management",
+            "key" : "/news-manage",
+            "pagepermission" : 1,
+            "grade" : 1
+        },
+        {
+            "id" : 21,
+            "title" : "Audit Management",
+            "key" : "/audit-manage",
+            "pagepermission" : 1,
+            "grade" : 1
+        },
+        {
+            "id" : 24,
+            "title" : "Publish Management",
+            "key" : "/publish-manage",
+            "pagepermission" : 1,
+            "grade" : 1
+        }
+    ],
+    "children": [
+        {
+            "id" : 3,
+            "title" : "Add User",
+            "rightId" : 2,
+            "key" : "/user-manage/add",
+            "grade" : 2
+        },
+        {
+            "id" : 4,
+            "title" : "Delete User",
+            "rightId" : 2,
+            "key" : "/user-manage/delete",
+            "grade" : 2
+        },
+        {
+            "id" : 5,
+            "title" : "Update User",
+            "rightId" : 2,
+            "key" : "/user-manage/update",
+            "grade" : 2
+        },
+        {
+            "id" : 6,
+            "title" : "User List",
+            "rightId" : 2,
+            "key" : "/user-manage/list",
+            "pagepermission" : 1,
+            "grade" : 2
+        },
+        {
+            "id" : 8,
+            "title" : "Role List",
+            "rightId" : 7,
+            "key" : "/right-manage/role/list",
+            "pagepermission" : 1,
+            "grade" : 2
+        },
+        {
+            "id" : 9,
+            "title" : "Right List",
+            "rightId" : 7,
+            "key" : "/right-manage/right/list",
+            "pagepermission" : 1,
+            "grade" : 2
+        },
+        {
+            "id" : 10,
+            "title" : "Role Update",
+            "rightId" : 7,
+            "key" : "/right-manage/role/update",
+            "grade" : 2
+        },
+        {
+            "id" : 11,
+            "title" : "Delete Role",
+            "rightId" : 7,
+            "key" : "/right-manage/role/delete",
+            "grade" : 2
+        },
+        {
+            "id" : 12,
+            "title" : "Update Right",
+            "rightId" : 7,
+            "key" : "/right-manage/right/update",
+            "grade" : 2
+        },
+        {
+            "id" : 13,
+            "title" : "Delete Right",
+            "rightId" : 7,
+            "key" : "/right-manage/right/delete",
+            "grade" : 2
+        },
+        {
+            "id" : 15,
+            "title" : "News List",
+            "rightId" : 14,
+            "key" : "/news-manage/news/list",
+            "pagepermission" : 1,
+            "grade" : 2
+        },
+        {
+            "id" : 16,
+            "title" : "Write News",
+            "rightId" : 14,
+            "key" : "/news-manage/news/write",
+            "grade" : 2
+        },
+        {
+            "id" : 17,
+            "title" : "update News",
+            "rightId" : 14,
+            "key" : "/news-manage/news/update",
+            "grade" : 2
+        },
+        {
+            "id" : 18,
+            "title" : "News Preview",
+            "rightId" : 14,
+            "key" : "/news-manage/news/preview",
+            "grade" : 2
+        },
+        {
+            "id" : 19,
+            "title" : "Draft Box",
+            "rightId" : 14,
+            "key" : "/news-manage/news/draft",
+            "grade" : 2
+        },
+        {
+            "id" : 20,
+            "title" : "News Category",
+            "rightId" : 14,
+            "key" : "/news-manage/news/category",
+            "grade" : 2
+        },
+        {
+            "id" : 22,
+            "title" : "Audit News",
+            "rightId" : 21,
+            "key" : "/audit-manage/audit/news",
+            "grade" : 2
+        },
+        {
+            "id" : 23,
+            "title" : "Audit List",
+            "rightId" : 21,
+            "key" : "/audit-manage/audit/list",
+            "grade" : 2
+        },
+        {
+            "id" : 25,
+            "title" : "Unpublished",
+            "rightId" : 24,
+            "key" : "/pulish-manage/unpublished",
+            "grade" : 2
+        },
+        {
+            "id" : 26,
+            "title" : "Published",
+            "rightId" : 24,
+            "key" : "/pulish-manage/published",
+            "grade" : 2
+        },
+        {
+            "id" : 27,
+            "title" : "Archived",
+            "rightId" : 24,
+            "key" : "/pulish-manage/archived",
+            "grade" : 2
+        }
+    ]
+}
