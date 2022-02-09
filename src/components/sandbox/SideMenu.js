@@ -61,14 +61,18 @@ function SideMenu(props) {
     })
   }, [])
 
+  const checkPagePermission = item => {
+    return item.pagepermission
+  }
+
   const renderMenu = (list) => {
     return list.map(item => {
-      if(item.children) {
+      if(item.children && checkPagePermission(item)) {
         return <SubMenu key={item.key} title={item.title} icon={item.icon}>
                   {renderMenu(item.children)}
               </SubMenu>
       }else {
-        return <MenuItem key={item.key} icon={item.icon} onClick={() => {
+        return checkPagePermission(item) && <MenuItem key={item.key} icon={item.icon} onClick={() => {
           navigate(item.key)
         }}>{item.title}</MenuItem>
       }

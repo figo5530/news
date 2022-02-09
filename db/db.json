@@ -122,7 +122,6 @@
             "title" : "News List",
             "rightId" : 14,
             "key" : "/news-manage/news/list",
-            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -130,6 +129,7 @@
             "title" : "Write News",
             "rightId" : 14,
             "key" : "/news-manage/news/write",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -151,6 +151,7 @@
             "title" : "Draft Box",
             "rightId" : 14,
             "key" : "/news-manage/news/draft",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -158,6 +159,7 @@
             "title" : "News Category",
             "rightId" : 14,
             "key" : "/news-manage/news/category",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -165,6 +167,7 @@
             "title" : "Audit News",
             "rightId" : 21,
             "key" : "/audit-manage/audit/news",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -172,6 +175,7 @@
             "title" : "Audit List",
             "rightId" : 21,
             "key" : "/audit-manage/audit/list",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -179,6 +183,7 @@
             "title" : "Unpublished",
             "rightId" : 24,
             "key" : "/pulish-manage/unpublished",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -186,6 +191,7 @@
             "title" : "Published",
             "rightId" : 24,
             "key" : "/pulish-manage/published",
+            "pagepermission" : 1,
             "grade" : 2
         },
         {
@@ -193,6 +199,7 @@
             "title" : "Archived",
             "rightId" : 24,
             "key" : "/pulish-manage/archived",
+            "pagepermission" : 1,
             "grade" : 2
         }
     ]
