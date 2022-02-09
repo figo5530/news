@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd'
-// import {
-//   UserOutlined,
-//   SettingOutlined
-// } from '@ant-design/icons';
+import {
+  UserOutlined,
+  SettingOutlined,
+  AuditOutlined,
+  FileSearchOutlined,
+  HomeOutlined,
+  SendOutlined,
+  FieldTimeOutlined,
+  PaperClipOutlined
+} from '@ant-design/icons';
 import './SideMenu.css'
 import { useNavigate } from 'react-router-dom'
 import MenuItem from 'antd/lib/menu/MenuItem';
@@ -11,42 +17,7 @@ import axios from 'axios'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
-// const menuList = [
-//   {
-//     key: '/home',
-//     title: 'Home',
-//     icon: <UserOutlined />
-//   },
-//   {
-//     key: '/user-manage',
-//     title: 'User Administration',
-//     icon: <SettingOutlined />,
-//     children: [
-//       {
-//         key: '/user-manage/list',
-//         title: 'User List',
-//         icon: <UserOutlined />
-//       },
-//     ]
-//   },
-//   {
-//     key: '/right-manage',
-//     title: 'Right Administration',
-//     icon: <SettingOutlined />,
-//     children: [
-//       {
-//         key: '/right-manage/role/list',
-//         title: 'Role List',
-//         icon: <UserOutlined />
-//       },
-//       {
-//         key: '/right-manage/right/list',
-//         title: 'Right List',
-//         icon: <UserOutlined />
-//       },
-//     ]
-//   }
-// ]
+
 
 function SideMenu(props) {
   
@@ -65,14 +36,34 @@ function SideMenu(props) {
     return item.pagepermission
   }
 
+  const iconList = {
+    "/home" : <HomeOutlined />,
+    "/user-manage" : <SettingOutlined />,
+    "/right-manage" : <SettingOutlined />,
+    "/news-manage" : <SettingOutlined />,
+    "/audit-manage" : <SettingOutlined />,
+    "/publish-manage" : <SettingOutlined />,
+    "/user-manage/list" : <UserOutlined />,
+    "/right-manage/role/list" : <UserOutlined />,
+    "/right-manage/right/list" : <UserOutlined />,
+    "/news-manage/news/write" : <SettingOutlined />,
+    "/news-manage/news/draft" : <SettingOutlined />,
+    "/news-manage/news/category" : <SettingOutlined />,
+    "/audit-manage/audit/news" : <FileSearchOutlined />,
+    "/audit-manage/audit/list" : <AuditOutlined />,
+    "/publish-manage/unpublished" : <FieldTimeOutlined />,
+    "/publish-manage/published" : <SendOutlined />,
+    "/publish-manage/archived" : <PaperClipOutlined />,
+  }
+
   const renderMenu = (list) => {
     return list.map(item => {
       if(item.children && checkPagePermission(item)) {
-        return <SubMenu key={item.key} title={item.title} icon={item.icon}>
+        return <SubMenu key={item.key} title={item.title} icon={iconList[item.key]}>
                   {renderMenu(item.children)}
               </SubMenu>
       }else {
-        return checkPagePermission(item) && <MenuItem key={item.key} icon={item.icon} onClick={() => {
+        return checkPagePermission(item) && <MenuItem key={item.key} icon={iconList[item.key]} onClick={() => {
           navigate(item.key)
         }}>{item.title}</MenuItem>
       }

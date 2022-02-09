@@ -182,7 +182,7 @@
             "id" : 25,
             "title" : "Unpublished",
             "rightId" : 24,
-            "key" : "/pulish-manage/unpublished",
+            "key" : "/publish-manage/unpublished",
             "pagepermission" : 1,
             "grade" : 2
         },
@@ -190,7 +190,7 @@
             "id" : 26,
             "title" : "Published",
             "rightId" : 24,
-            "key" : "/pulish-manage/published",
+            "key" : "/publish-manage/published",
             "pagepermission" : 1,
             "grade" : 2
         },
@@ -198,7 +198,7 @@
             "id" : 27,
             "title" : "Archived",
             "rightId" : 24,
-            "key" : "/pulish-manage/archived",
+            "key" : "/publish-manage/archived",
             "pagepermission" : 1,
             "grade" : 2
         }
