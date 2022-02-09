@@ -27,7 +27,6 @@ function SideMenu(props) {
 
   useEffect(() => {
     axios.get("http://localhost:5000/rights?_embed=children").then(res => {
-      console.log(res.data)
       setMenu(res.data)
     })
   }, [])
@@ -59,13 +58,18 @@ function SideMenu(props) {
   const renderMenu = (list) => {
     return list.map(item => {
       if(item.children && checkPagePermission(item)) {
-        return <SubMenu key={item.key} title={item.title} icon={iconList[item.key]}>
+        return (
+          <SubMenu key={item.key} title={item.title} icon={iconList[item.key]}>
                   {renderMenu(item.children)}
-              </SubMenu>
+          </SubMenu>
+          )
       }else {
-        return checkPagePermission(item) && <MenuItem key={item.key} icon={iconList[item.key]} onClick={() => {
-          navigate(item.key)
-        }}>{item.title}</MenuItem>
+        return (
+          checkPagePermission(item) && 
+          <MenuItem key={item.key} icon={iconList[item.key]} onClick={() => {
+            navigate(item.key)
+            }}>{item.title}
+          </MenuItem>)
       }
     })
   }
@@ -73,7 +77,7 @@ function SideMenu(props) {
   return (
     <Sider trigger={null} collapsible collapsed={false}>
     <div className="logo">News System</div>
-    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+    <Menu theme="dark" mode="inline" defaultSelectedKeys={['/home']}>
       {renderMenu(menu)}
     </Menu>
   </Sider>
