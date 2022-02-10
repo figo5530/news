@@ -83,7 +83,7 @@ function SideMenu(props) {
       <div style={{display: "flex", height: "100%", "flexDirection": "column"}}>
         <div className="logo">News System</div>
         <div style={{flex: 1, "overflow": "auto"}}>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedKeys]} defaultOpenKeys={openKeys}>
+          <Menu theme="dark" mode="inline" selectedKeys={[selectedKeys]} defaultOpenKeys={openKeys}>
             {renderMenu(menu)}
           </Menu>
         </div>
