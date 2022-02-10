@@ -11,7 +11,7 @@ import {
   PaperClipOutlined
 } from '@ant-design/icons';
 import './SideMenu.css'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import MenuItem from 'antd/lib/menu/MenuItem';
 import axios from 'axios'
 
@@ -22,6 +22,7 @@ const { SubMenu } = Menu
 function SideMenu(props) {
   
   let navigate = useNavigate()
+  let location = useLocation()
 
   const [menu, setMenu] = useState([])
 
@@ -74,12 +75,15 @@ function SideMenu(props) {
     })
   }
 
+  const selectedKeys = location.pathname
+  const openKeys = ["/" + selectedKeys.split('/')[1]]
+
   return (
     <Sider trigger={null} collapsible collapsed={false}>
       <div style={{display: "flex", height: "100%", "flexDirection": "column"}}>
         <div className="logo">News System</div>
         <div style={{flex: 1, "overflow": "auto"}}>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['/home']}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[selectedKeys]} defaultOpenKeys={openKeys}>
             {renderMenu(menu)}
           </Menu>
         </div>
