@@ -11,7 +11,9 @@ export default function RightList() {
   useEffect(() => {
     axios.get("http://localhost:5000/rights?_embed=children").then(res => {
       let list = res.data
-      list[0].children = ''
+      list.forEach(l => {
+        if(l.children.length === 0) l.children = ''
+      })
       setDataSource(list)
     })
   },[])
@@ -67,8 +69,16 @@ export default function RightList() {
   }
 
   const deleteMethod = (item) => {
-    setDataSource(dataSource.filter(data => data.id !== item.id))
-    axios.delete(`http://localhost:5000/rights/${item.id}`)
+    if(item.grade === 1) {
+      setDataSource(dataSource.filter(data => data.id !== item.id))
+      axios.delete(`http://localhost:5000/rights/${item.id}`)
+    } else {
+      let list = dataSource.filter(data => data.id === item.rightId)
+      list[0].children = list[0].children.filter(data => data.id !== item.id)
+      setDataSource([...dataSource])
+      axios.delete(`http://localhost:5000/children/${item.id}`)
+    }
+    
   }
 
   return (
