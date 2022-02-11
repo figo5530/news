@@ -8,8 +8,10 @@ export default function RightList() {
   const [dataSource, setDataSource] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:5000/rights").then(res => {
-      setDataSource(res.data)
+    axios.get("http://localhost:5000/rights?_embed=children").then(res => {
+      let list = res.data
+      list[0].children = ''
+      setDataSource(list)
     })
   },[])
 
