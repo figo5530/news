@@ -1,10 +1,11 @@
-import { Table, Tag, Button } from 'antd';
+import { Table, Tag, Button, Modal } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
+import {DeleteOutlined, EditOutlined, ExclamationCircleOutlined} from '@ant-design/icons'
 
 export default function RightList() {
 
+  const { confirm } = Modal
   const [dataSource, setDataSource] = useState([])
 
   useEffect(() => {
@@ -39,16 +40,36 @@ export default function RightList() {
     },
     {
       title: 'Operation',
-      render: () => {
+      render: (item) => {
         return (
           <div>
             <Button type='primary' shape='circle' icon={<EditOutlined />}/>
-            <Button danger  shape='circle' icon={<DeleteOutlined />}/>
+            <Button danger  shape='circle' icon={<DeleteOutlined onClick={() => showConfirm(item)}/>}/>
           </div>
         )
       }
     },
   ];
+
+  const showConfirm = (item) => {
+    confirm({
+      title: 'Do you Want to delete this right?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Some descriptions',
+      onOk() {
+        // console.log('OK');
+        deleteMethod(item)
+      },
+      onCancel() {
+        // console.log('Cancel');
+      },
+    });
+  }
+
+  const deleteMethod = (item) => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.delete(`http://localhost:5000/rights/${item.id}`)
+  }
 
   return (
     <div>
