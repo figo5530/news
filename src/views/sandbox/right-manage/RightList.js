@@ -46,7 +46,7 @@ export default function RightList() {
         return (
           <div>
             <Popover content={<div style={{textAlign: "center"}}>
-              <Switch></Switch>
+              <Switch checked={item.pagepermission} onChange={() => switchMethod(item)}></Switch>
             </div>} title="Configuration" trigger={item.pagepermission === undefined ? "" : "click"}>
               <Button type='primary' shape='circle' icon={<EditOutlined />} disabled={item.pagepermission === undefined}/>
             </Popover>
@@ -56,6 +56,20 @@ export default function RightList() {
       }
     },
   ];
+
+  const switchMethod = item => {
+    item.pagepermission = !item.pagepermission
+    setDataSource([...dataSource])
+    if(item.grade === 1) {
+      axios.patch(`http://localhost:5000/rights/${item.id}`, {
+        pagepermission: item.pagepermission
+      })
+    }else {
+      axios.patch(`http://localhost:5000/children/${item.id}`, {
+        pagepermission: item.pagepermission
+      })
+    }
+  }
 
   const showConfirm = (item) => {
     confirm({

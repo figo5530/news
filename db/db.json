@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Home",
       "key": "/home",
-      "pagepermission": 1,
+      "pagepermission": true,
       "grade": 1
     },
     {
