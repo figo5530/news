@@ -48,9 +48,9 @@ export default function RightList() {
             <Popover content={<div style={{textAlign: "center"}}>
               <Switch checked={item.pagepermission} onChange={() => switchMethod(item)}></Switch>
             </div>} title="Configuration" trigger={item.pagepermission === undefined ? "" : "click"}>
-              <Button type='primary' shape='circle' icon={<EditOutlined />} disabled={item.pagepermission === undefined}/>
+              <Button type='primary' shape='circle' icon={<EditOutlined />} style={{marginRight: '5px'}} disabled={item.pagepermission === undefined}/>
             </Popover>
-            <Button danger  shape='circle' icon={<DeleteOutlined onClick={() => showConfirm(item)}/>}/>
+            <Button danger  shape='circle' icon={<DeleteOutlined onClick={() => showConfirm(item)}/>} style={{marginLeft: '5px'}}/>
           </div>
         )
       }

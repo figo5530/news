@@ -202,5 +202,88 @@
       "pagepermission": 1,
       "grade": 2
     }
+  ],
+  "roles" : [
+    {
+      "id": 1,
+      "roleName": "Super",
+      "roleType": 1,
+      "rights": [
+        "/user-manage",
+        "/user-manage/add",
+        "/user-manage/delete",
+        "/user-manage/update",
+        "/user-manage/list",
+        "/right-manage",
+        "/right-manage/role/list",
+        "/right-manage/right/list",
+        "/right-manage/role/update",
+        "/right-manage/role/delete",
+        "/right-manage/right/update",
+        "/right-manage/right/delete",
+        "/news-manage",
+        "/news-manage/news/list",
+        "/news-manage/news/write",
+        "/news-manage/news/update/:id",
+        "/news-manage/news/preview/:id",
+        "/news-manage/news/draft",
+        "/news-manage/news/category",
+        "/audit-manage/",
+        "/audit-manage/audit/list",
+        "/audit-manage/audit/news",
+        "/publish-manage",
+        "/publish-manage/unpublished",
+        "/publish-manage/published",
+        "/publish-manage/archived",
+        "/home"
+      ]
+    },
+    {
+      "id": 2,
+      "roleName": "Regional Super",
+      "roleType": 2,
+      "rights": [
+        "/user-manage",
+        "/user-manage/add",
+        "/user-manage/delete",
+        "/user-manage/update",
+        "/user-manage/list",
+        "/news-manage",
+        "/news-manage/news/list",
+        "/news-manage/news/write",
+        "/news-manage/news/update/:id",
+        "/news-manage/news/preview/:id",
+        "/news-manage/news/draft",
+        "/news-manage/news/category",
+        "/audit-manage/",
+        "/audit-manage/audit/list",
+        "/audit-manage/audit/news",
+        "/publish-manage",
+        "/publish-manage/unpublished",
+        "/publish-manage/published",
+        "/publish-manage/archived",
+        "/home"
+      ]
+    },
+    {
+      "id": 3,
+      "roleName": "Regional Editor",
+      "roleType": 3,
+      "rights": [
+        "/news-manage",
+        "/news-manage/news/list",
+        "/news-manage/news/write",
+        "/news-manage/news/update/:id",
+        "/news-manage/news/preview/:id",
+        "/news-manage/news/draft",
+        "/audit-manage/",
+        "/audit-manage/audit/list",
+        "/publish-manage",
+        "/publish-manage/unpublished",
+        "/publish-manage/published",
+        "/publish-manage/archived",
+        "/home"
+      ]
+    }
   ]
 }
