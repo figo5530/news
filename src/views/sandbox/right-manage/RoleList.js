@@ -8,6 +8,7 @@ export default function RoleList() {
   const [dataSource, setDataSource] = useState([])
   const [rightList, setRightList] = useState([])
   const [currentRights, setCurrentRights] = useState([])
+  const [currentId, setCurrentId] = useState(0)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const { confirm } = Modal
   const columns = [
@@ -32,6 +33,7 @@ export default function RoleList() {
             <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} onClick={() => {
               setIsModalVisible(true)
               setCurrentRights(item.rights)
+              setCurrentId(item.id)
             }}/>
             <Button danger  shape='circle' icon={<DeleteOutlined />} onClick={() => showConfirm(item)} style={{marginLeft: '5px'}}/>
           </div>
@@ -70,7 +72,22 @@ export default function RoleList() {
   }
 
   const handleOk = () => {
-
+    console.log(currentRights)
+    setIsModalVisible(false)
+    //update current right
+    setDataSource(dataSource.map(item => {
+      if(item.id === currentId) {
+        return {
+          ...item,
+          rights: currentRights
+        }
+      }
+      return item
+    }))
+    //patch
+    axios.patch(`http://localhost:5000/roles/${currentId}`, {
+      rights: currentRights
+    })
   }
 
   const handleCancel = () => {
@@ -79,7 +96,7 @@ export default function RoleList() {
 
   const handleCheck = (checkKeys) => {
     console.log(checkKeys)
-    setCurrentRights(checkKeys)
+    setCurrentRights(checkKeys.checked)
   }
 
   return (

@@ -203,14 +203,13 @@
       "grade": 2
     }
   ],
-  "roles" : [
+  "roles": [
     {
       "id": 1,
       "roleName": "Super",
       "roleType": 1,
       "rights": [
         "/user-manage",
-        "/user-manage/add",
         "/user-manage/delete",
         "/user-manage/update",
         "/user-manage/list",
@@ -235,7 +234,8 @@
         "/publish-manage/unpublished",
         "/publish-manage/published",
         "/publish-manage/archived",
-        "/home"
+        "/home",
+        "/user-manage/add"
       ]
     },
     {
