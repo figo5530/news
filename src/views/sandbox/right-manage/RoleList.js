@@ -6,6 +6,7 @@ import {UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined} from '
 export default function RoleList() {
 
   const [dataSource, setDataSource] = useState([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const { confirm } = Modal
   const columns = [
     {
@@ -26,12 +27,13 @@ export default function RoleList() {
       render: (item) => {
         return (
           <div>
-            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} />
+            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} onClick={() => setIsModalVisible(true)}/>
             <Button danger  shape='circle' icon={<DeleteOutlined />} onClick={() => showConfirm(item)} style={{marginLeft: '5px'}}/>
           </div>
         )}
     }
   ]
+
   useEffect(() => {
     axios.get("http://localhost:5000/roles").then(res => {
       setDataSource(res.data)
@@ -56,9 +58,25 @@ export default function RoleList() {
     axios.delete(`http://localhost:5000/roles/${item.id}`)
   }
 
+  const handleOk = () => {
+
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
   return (
     <div>
       <Table dataSource={dataSource} columns={columns} rowKey={item => item.id}></Table>
+
+      <Modal title="Role" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
+      
     </div>
   )
 }
