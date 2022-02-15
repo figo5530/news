@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Switch, Table, Modal, Form, Input } from 'antd'
+import { Button, Switch, Table, Modal, Form, Input, Select } from 'antd'
 import { UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 
 
@@ -8,10 +8,26 @@ export default function UserList() {
 
   const [dataSource, setDataSource] = useState([])
   const [isVisible, setIsVisible] = useState(false)
+  const [roleList, setRoleList] = useState([])
+  const [regionList, setRegionList] = useState([])
   const { confirm } = Modal
+  const { Option } = Select
+
   useEffect(() => {
     axios.get("http://localhost:5000/users?_expand=role").then(res => {
       setDataSource(res.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/roles").then(res => {
+      setRoleList(res.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/regions").then(res => {
+      setRegionList(res.data)
     })
   }, [])
 
@@ -114,15 +130,19 @@ export default function UserList() {
             label="Reigon"
             rules={[{ required: true, message: 'Please select the reigon!' }]}
           >
-            <Input />
+            <Select>
+              {regionList.map(item => <Option value={item.value} key={item.id}>{item.title}</Option>)}
+            </Select>
           </Form.Item>
 
           <Form.Item
-            name="role"
+            name="roleId"
             label="Role"
             rules={[{ required: true, message: 'Please select the role!' }]}
           >
-            <Input />
+            <Select>
+              {roleList.map(item => <Option value={item.id} key={item.id}>{item.roleName}</Option>)}
+            </Select>
           </Form.Item>
         </Form>
       </Modal>

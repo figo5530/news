@@ -314,5 +314,37 @@
       "region": "North America",
       "roleId": 2
     }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "title": "Asia",
+      "value": "Asia"
+    },
+    {
+      "id": 2,
+      "title": "Africa",
+      "value": "Africa"
+    },
+    {
+      "id": 3,
+      "title": "Europe",
+      "value": "Europe"
+    },
+    {
+      "id": 4,
+      "title": "North America",
+      "value": "North America"
+    },
+    {
+      "id": 5,
+      "title": "South America",
+      "value": "South America"
+    },
+    {
+      "id": 6,
+      "title": "Oceania",
+      "value": "Oceania"
+    }
   ]
 }
