@@ -1,4 +1,4 @@
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Tree } from 'antd';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import {UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons'
@@ -6,6 +6,8 @@ import {UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined} from '
 export default function RoleList() {
 
   const [dataSource, setDataSource] = useState([])
+  const [rightList, setRightList] = useState([])
+  const [currentRights, setCurrentRights] = useState([])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const { confirm } = Modal
   const columns = [
@@ -27,7 +29,10 @@ export default function RoleList() {
       render: (item) => {
         return (
           <div>
-            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} onClick={() => setIsModalVisible(true)}/>
+            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} onClick={() => {
+              setIsModalVisible(true)
+              setCurrentRights(item.rights)
+            }}/>
             <Button danger  shape='circle' icon={<DeleteOutlined />} onClick={() => showConfirm(item)} style={{marginLeft: '5px'}}/>
           </div>
         )}
@@ -37,6 +42,12 @@ export default function RoleList() {
   useEffect(() => {
     axios.get("http://localhost:5000/roles").then(res => {
       setDataSource(res.data)
+    })
+  }, [])
+  
+  useEffect(() => {
+    axios.get("http://localhost:5000/rights?_embed=children").then(res => {
+      setRightList(res.data)
     })
   }, [])
 
@@ -66,15 +77,17 @@ export default function RoleList() {
     setIsModalVisible(false)
   }
 
+  const handleCheck = (checkKeys) => {
+    console.log(checkKeys)
+    setCurrentRights(checkKeys)
+  }
+
   return (
     <div>
       <Table dataSource={dataSource} columns={columns} rowKey={item => item.id}></Table>
 
       <Modal title="Role" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Tree checkable treeData={rightList} checkedKeys={currentRights} onCheck={handleCheck} checkStrictly={true}/>
       </Modal>
       
     </div>
