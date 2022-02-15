@@ -285,5 +285,34 @@
         "/home"
       ]
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": 123456,
+      "roleState": true,
+      "default": true,
+      "region": "",
+      "roleId": 1
+    },
+    {
+      "id": 2,
+      "username": "Test",
+      "password": 123,
+      "roleState": true,
+      "default": false,
+      "region": "Asia",
+      "roleId": 2
+    },
+    {
+      "id": 3,
+      "username": "Figo",
+      "password": 123,
+      "roleState": true,
+      "default": false,
+      "region": "North America",
+      "roleId": 2
+    }
   ]
 }
