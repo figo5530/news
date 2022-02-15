@@ -1,18 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Switch, Table, Modal } from 'antd'
-import {UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons'
+import { Button, Switch, Table, Modal, Form, Input } from 'antd'
+import { UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 
 
 export default function UserList() {
 
   const [dataSource, setDataSource] = useState([])
-  const { confirm}  = Modal
+  const [isVisible, setIsVisible] = useState(false)
+  const { confirm } = Modal
   useEffect(() => {
     axios.get("http://localhost:5000/users?_expand=role").then(res => {
       setDataSource(res.data)
     })
-  },[])
+  }, [])
 
   const columns = [
     {
@@ -45,8 +46,8 @@ export default function UserList() {
       render: (item) => {
         return (
           <div>
-            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{marginRight: '5px'}} disabled={item.default}/>
-            <Button danger  shape='circle' icon={<DeleteOutlined />} style={{marginLeft: '5px'}} disabled={item.default} onClick={() => showConfirm(item)} />
+            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{ marginRight: '5px' }} disabled={item.default} />
+            <Button danger shape='circle' icon={<DeleteOutlined />} style={{ marginLeft: '5px' }} disabled={item.default} onClick={() => showConfirm(item)} />
           </div>
         )
       }
@@ -68,16 +69,64 @@ export default function UserList() {
 
   return (
     <div>
-      <Table 
-        dataSource={dataSource} 
-        columns={columns} 
+      <Button type='primary' style={{ marginBottom: '10px' }} onClick={() => setIsVisible(true)}>Create User</Button>
+      <Table
+        dataSource={dataSource}
+        columns={columns}
         rowKey={item => item.id}
         pagination={{
           pageSize: 5
         }}
       >
       </Table>
+
+      <Modal
+        visible={isVisible}
+        title="Create User"
+        okText="Create"
+        cancelText="Cancel"
+        onCancel={() => setIsVisible(false)}
+        onOk={() => {
+          console.log("add")
+        }}
+      >
+        <Form
+          layout="vertical"
+        >
+          <Form.Item
+            name="username"
+            label="Username"
+            rules={[{ required: true, message: 'Please input the username!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[{ required: true, message: 'Please input the password!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="reigon"
+            label="Reigon"
+            rules={[{ required: true, message: 'Please select the reigon!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="role"
+            label="Role"
+            rules={[{ required: true, message: 'Please select the role!' }]}
+          >
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
-    
+
   )
 }
