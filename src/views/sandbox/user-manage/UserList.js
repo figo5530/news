@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Switch, Table, Modal, Form, Input, Select } from 'antd'
+import { Button, Switch, Table, Modal } from 'antd'
 import { UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
+import UserForm from '../../../components/user-manage/UserForm';
 
 
 export default function UserList() {
@@ -11,7 +12,6 @@ export default function UserList() {
   const [roleList, setRoleList] = useState([])
   const [regionList, setRegionList] = useState([])
   const { confirm } = Modal
-  const { Option } = Select
 
   useEffect(() => {
     axios.get("http://localhost:5000/users?_expand=role").then(res => {
@@ -106,45 +106,7 @@ export default function UserList() {
           console.log("add")
         }}
       >
-        <Form
-          layout="vertical"
-        >
-          <Form.Item
-            name="username"
-            label="Username"
-            rules={[{ required: true, message: 'Please input the username!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[{ required: true, message: 'Please input the password!' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="reigon"
-            label="Reigon"
-            rules={[{ required: true, message: 'Please select the reigon!' }]}
-          >
-            <Select>
-              {regionList.map(item => <Option value={item.value} key={item.id}>{item.title}</Option>)}
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            name="roleId"
-            label="Role"
-            rules={[{ required: true, message: 'Please select the role!' }]}
-          >
-            <Select>
-              {roleList.map(item => <Option value={item.id} key={item.id}>{item.roleName}</Option>)}
-            </Select>
-          </Form.Item>
-        </Form>
+        <UserForm regionList={regionList} roleList={roleList} />
       </Modal>
     </div>
 
