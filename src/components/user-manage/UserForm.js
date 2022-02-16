@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Form, Input, Select } from 'antd'
 
 
-export default function UserForm(props) {
+const UserForm = forwardRef((props, ref) => {
     const { Option } = Select
     return (
         <div>
             <Form
                 layout="vertical"
+                ref={ref}
             >
                 <Form.Item
                     name="username"
@@ -47,4 +48,5 @@ export default function UserForm(props) {
             </Form>
         </div>
     )
-}
+})
+export default UserForm

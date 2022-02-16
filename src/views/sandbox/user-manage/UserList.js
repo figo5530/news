@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button, Switch, Table, Modal } from 'antd'
 import { UnorderedListOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import UserForm from '../../../components/user-manage/UserForm';
@@ -11,6 +11,7 @@ export default function UserList() {
   const [isVisible, setIsVisible] = useState(false)
   const [roleList, setRoleList] = useState([])
   const [regionList, setRegionList] = useState([])
+  const addForm = useRef(null)
   const { confirm } = Modal
 
   useEffect(() => {
@@ -103,10 +104,15 @@ export default function UserList() {
         cancelText="Cancel"
         onCancel={() => setIsVisible(false)}
         onOk={() => {
-          console.log("add")
+          // console.log(addForm)
+          addForm.current.validateFields().then(value => {
+            console.log(value)
+          }).catch(err => {
+            console.log(err)
+          })
         }}
       >
-        <UserForm regionList={regionList} roleList={roleList} />
+        <UserForm regionList={regionList} roleList={roleList} ref={addForm}/>
       </Modal>
     </div>
 
