@@ -313,6 +313,42 @@
       "default": false,
       "region": "North America",
       "roleId": 2
+    },
+    {
+      "username": "test",
+      "password": "123",
+      "region": "Africa",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 4
+    },
+    {
+      "username": "test2",
+      "password": "123",
+      "region": "Europe",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 5
+    },
+    {
+      "username": "test3",
+      "password": "123",
+      "region": "Africa",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 6
+    },
+    {
+      "username": "test4",
+      "password": "123",
+      "region": "Africa",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 7
     }
   ],
   "regions": [

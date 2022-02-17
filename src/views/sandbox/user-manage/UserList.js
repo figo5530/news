@@ -84,6 +84,27 @@ export default function UserList() {
     });
   }
 
+  const handleAddForm = () => {
+    addForm.current.validateFields().then(value => {
+      console.log(value)
+      setIsVisible(false)
+      addForm.current.resetFields()
+      axios.post(`http://localhost:5000/users`, {
+        ...value,
+        "roleState": true,
+        "default": false
+      }).then(res => {
+        console.log(res)
+        setDataSource([...dataSource, {
+          ...res.data,
+          role: roleList.filter(item => item.id === value.roleId)[0]
+        }])
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   return (
     <div>
       <Button type='primary' style={{ marginBottom: '10px' }} onClick={() => setIsVisible(true)}>Create User</Button>
@@ -103,14 +124,7 @@ export default function UserList() {
         okText="Create"
         cancelText="Cancel"
         onCancel={() => setIsVisible(false)}
-        onOk={() => {
-          // console.log(addForm)
-          addForm.current.validateFields().then(value => {
-            console.log(value)
-          }).catch(err => {
-            console.log(err)
-          })
-        }}
+        onOk={() => handleAddForm()}
       >
         <UserForm regionList={regionList} roleList={roleList} ref={addForm}/>
       </Modal>
