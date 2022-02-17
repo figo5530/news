@@ -77,11 +77,16 @@ export default function UserList() {
       icon: <ExclamationCircleOutlined />,
       content: 'Some descriptions',
       onOk() {
-        // deleteMethod(item)
+        deleteMethod(item)
       },
       onCancel() {
       },
     });
+  }
+
+  const deleteMethod = item => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.delete(`http://localhost:5000/users/${item.id}`)
   }
 
   const handleAddForm = () => {
