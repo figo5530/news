@@ -55,7 +55,7 @@ export default function UserList() {
       title: 'State',
       dataIndex: 'roleState',
       render: (roleState, item) => {
-        return <Switch checked={roleState} disabled={item.default}></Switch>
+        return <Switch checked={roleState} disabled={item.default} onChange={() => handleChange(item)}></Switch>
       }
     },
     {
@@ -70,6 +70,15 @@ export default function UserList() {
       }
     }
   ]
+
+  const handleChange = item => {
+    item.roleState = !item.roleState
+    setDataSource([...dataSource])
+
+    axios.patch(`http://localhost:5000/users/${item.id}`, {
+      roleState: item.roleState
+    })
+  }
 
   const showConfirm = (item) => {
     confirm({
