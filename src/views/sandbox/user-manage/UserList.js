@@ -10,6 +10,7 @@ export default function UserList() {
   const [dataSource, setDataSource] = useState([])
   const [isVisible, setIsVisible] = useState(false)
   const [isUpdateVisible, setIsUpdateVisible] = useState(false)
+  const [isUpdateDisabled, setIsUpdateDisabled] = useState(false)
   const [roleList, setRoleList] = useState([])
   const [regionList, setRegionList] = useState([])
   const addForm = useRef(null)
@@ -76,6 +77,11 @@ export default function UserList() {
   const handleUpdate = item => {
     setTimeout(() => {
       setIsUpdateVisible(true)
+      if(item.roleId === 1) {
+        setIsUpdateDisabled(true)
+      }else {
+        setIsUpdateDisabled(false)
+      }
       updateForm.current.setFieldsValue(item)
     }, 0)
   }
@@ -159,10 +165,13 @@ export default function UserList() {
         title="Update User"
         okText="Update"
         cancelText="Cancel"
-        onCancel={() => setIsUpdateVisible(false)}
+        onCancel={() => {
+          setIsUpdateVisible(false)
+          setIsUpdateDisabled(!isUpdateDisabled)
+        }}
         onOk={() => handleUpdateForm()}
       >
-        <UserForm regionList={regionList} roleList={roleList} ref={updateForm}/>
+        <UserForm regionList={regionList} roleList={roleList} ref={updateForm} isUpdateDisabled={isUpdateDisabled}/>
       </Modal>
     </div>
 
