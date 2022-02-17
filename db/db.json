@@ -331,6 +331,15 @@
       "roleState": true,
       "default": false,
       "id": 7
+    },
+    {
+      "username": "test",
+      "password": "123",
+      "region": "Africa",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 8
     }
   ],
   "regions": [

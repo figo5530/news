@@ -9,9 +9,11 @@ export default function UserList() {
 
   const [dataSource, setDataSource] = useState([])
   const [isVisible, setIsVisible] = useState(false)
+  const [isUpdateVisible, setIsUpdateVisible] = useState(false)
   const [roleList, setRoleList] = useState([])
   const [regionList, setRegionList] = useState([])
   const addForm = useRef(null)
+  const updateForm = useRef(null)
   const { confirm } = Modal
 
   useEffect(() => {
@@ -63,13 +65,20 @@ export default function UserList() {
       render: (item) => {
         return (
           <div>
-            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{ marginRight: '5px' }} disabled={item.default} />
+            <Button type='primary' shape='circle' icon={<UnorderedListOutlined />} style={{ marginRight: '5px' }} disabled={item.default} onClick={() => handleUpdate(item)}/>
             <Button danger shape='circle' icon={<DeleteOutlined />} style={{ marginLeft: '5px' }} disabled={item.default} onClick={() => showConfirm(item)} />
           </div>
         )
       }
     }
   ]
+
+  const handleUpdate = item => {
+    setTimeout(() => {
+      setIsUpdateVisible(true)
+      updateForm.current.setFieldsValue(item)
+    }, 0)
+  }
 
   const handleChange = item => {
     item.roleState = !item.roleState
@@ -100,7 +109,6 @@ export default function UserList() {
 
   const handleAddForm = () => {
     addForm.current.validateFields().then(value => {
-      console.log(value)
       setIsVisible(false)
       addForm.current.resetFields()
       axios.post(`http://localhost:5000/users`, {
@@ -108,7 +116,6 @@ export default function UserList() {
         "roleState": true,
         "default": false
       }).then(res => {
-        console.log(res)
         setDataSource([...dataSource, {
           ...res.data,
           role: roleList.filter(item => item.id === value.roleId)[0]
@@ -117,6 +124,10 @@ export default function UserList() {
     }).catch(err => {
       console.log(err)
     })
+  }
+
+  const handleUpdateForm = () => {
+    
   }
 
   return (
@@ -141,6 +152,17 @@ export default function UserList() {
         onOk={() => handleAddForm()}
       >
         <UserForm regionList={regionList} roleList={roleList} ref={addForm}/>
+      </Modal>
+      
+      <Modal
+        visible={isUpdateVisible}
+        title="Update User"
+        okText="Update"
+        cancelText="Cancel"
+        onCancel={() => setIsUpdateVisible(false)}
+        onOk={() => handleUpdateForm()}
+      >
+        <UserForm regionList={regionList} roleList={roleList} ref={updateForm}/>
       </Modal>
     </div>
 
