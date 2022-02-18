@@ -40,6 +40,17 @@ export default function UserList() {
     {
       title: 'region',
       dataIndex: 'region',
+      filters: [
+        ...regionList.map(item => ({
+          text: item.title,
+          value: item.value
+        })),
+        {
+          text: "Global",
+          value: ""
+        }
+      ],
+      onFilter: (value, item) => item.region === value,
       render: (region) => {
         return <b>{region === "" ? "Global" : region}</b>
       }
@@ -47,6 +58,13 @@ export default function UserList() {
     {
       title: 'Role',
       dataIndex: 'role',
+      filters: [
+        ...roleList.map(item => ({
+          text: item.roleName,
+          value: item.roleName
+        }))
+      ],
+      onFilter: (value, item) => item.role.roleName === value,
       render: (role) => {
         return role?.roleName
       }
