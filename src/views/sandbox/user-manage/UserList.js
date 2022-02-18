@@ -13,6 +13,7 @@ export default function UserList() {
   const [isUpdateDisabled, setIsUpdateDisabled] = useState(false)
   const [roleList, setRoleList] = useState([])
   const [regionList, setRegionList] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
   const addForm = useRef(null)
   const updateForm = useRef(null)
   const { confirm } = Modal
@@ -84,6 +85,7 @@ export default function UserList() {
       }
       updateForm.current.setFieldsValue(item)
     }, 0)
+    setCurrentUser(item)
   }
 
   const handleChange = item => {
@@ -133,7 +135,22 @@ export default function UserList() {
   }
 
   const handleUpdateForm = () => {
-    
+    updateForm.current.validateFields().then(value => {
+      setIsUpdateVisible(false)
+      setDataSource(dataSource.map(item => {
+        if(item.id === currentUser.id) {
+          return {
+            ...item,
+            ...value,
+            role: roleList.filter(data => data.id === value.roleId)[0]
+          }
+        }
+        return item
+      }))
+      setIsUpdateDisabled(!isUpdateDisabled)
+
+      axios.patch(`http://localhost:5000/users/${currentUser.id}`, value)
+    })
   }
 
   return (
