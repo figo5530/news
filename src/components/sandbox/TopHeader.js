@@ -4,6 +4,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom'
 const { Header } = Layout;
 
 export default function TopHeader() {
@@ -11,13 +12,19 @@ export default function TopHeader() {
   const changeCollapsed = () => {
     setCollapsed(!collapsed)
   }
+  let navigate = useNavigate()
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="1">
           Administration
       </Menu.Item>
       
-      <Menu.Item danger>Sign out</Menu.Item>
+      <Menu.Item key="2" danger onClick={() => {
+        localStorage.removeItem("token")
+        navigate('/login')
+      }}>
+        Sign out
+      </Menu.Item>
     </Menu>
   );
   return (
