@@ -26,6 +26,8 @@ function SideMenu(props) {
 
   const [menu, setMenu] = useState([])
 
+  const {role: {rights}} = JSON.parse(localStorage.getItem("token"))
+
   useEffect(() => {
     axios.get("http://localhost:5000/rights?_embed=children").then(res => {
       setMenu(res.data)
@@ -33,7 +35,7 @@ function SideMenu(props) {
   }, [])
 
   const checkPagePermission = item => {
-    return item.pagepermission
+    return item.pagepermission && rights.includes(item.key)
   }
 
   const iconList = {

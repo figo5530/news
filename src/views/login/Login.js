@@ -1,16 +1,29 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
 
+  let navigate = useNavigate()
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    axios.get(`http://localhost:5000/users?username=${values.username}&password=${values.password}&roleState=true&_expand=role`).then(res => {
+      console.log(res.data)
+      if(res.data.length) {
+        localStorage.setItem("token", JSON.stringify(res.data[0]))
+        message.success("Logging in...")
+        navigate("/")
+      }else {
+        message.error("Invalid Username or Password")
+      }
+    })
   };
 
   return (
-    <div className='' style={{ background: 'linear-gradient(45deg, #0f3d75 30%, #021b39 90%)', height: "100%" }}>
-    {/* <div className='' style={{ background: 'linear-gradient(45deg, #34c6eb 30%, #346eeb 90%)', height: "100%" }}> */}
+    <div style={{ background: 'linear-gradient(45deg, #0f3d75 30%, #021b39 90%)', height: "100%" }}>
+    {/* <div style={{ background: 'linear-gradient(45deg, #34c6eb 30%, #346eeb 90%)', height: "100%" }}> */}
 
       <div className='formContainer'>
         <div className='loginTitle'>

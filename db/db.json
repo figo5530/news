@@ -298,7 +298,7 @@
     },
     {
       "id": 2,
-      "username": "Test",
+      "username": "test",
       "password": 123,
       "roleState": true,
       "default": false,

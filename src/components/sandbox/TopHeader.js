@@ -13,10 +13,11 @@ export default function TopHeader() {
     setCollapsed(!collapsed)
   }
   let navigate = useNavigate()
+  const {role: {roleName}, username} = JSON.parse(localStorage.getItem("token"))
   const menu = (
     <Menu>
       <Menu.Item key="1">
-          Administration
+          {roleName}
       </Menu.Item>
       
       <Menu.Item key="2" danger onClick={() => {
@@ -35,7 +36,7 @@ export default function TopHeader() {
       }
 
       <div style={{float : 'right'}}>
-        Welcome back admin
+        Welcome back {username}
         <Dropdown overlay={menu}>
           {/* <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             Hover me <DownOutlined />
