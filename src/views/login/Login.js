@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './login.css'
-
 export default function Login() {
 
   const onFinish = (values) => {
@@ -10,8 +9,8 @@ export default function Login() {
   };
 
   return (
-    <div className='' style={{ background: 'linear-gradient(45deg, #34c6eb 30%, #346eeb 90%)', height: "100%" }}>
-
+    <div className='' style={{ background: 'linear-gradient(45deg, #0f3d75 30%, #021b39 90%)', height: "100%" }}>
+    {/* <div className='' style={{ background: 'linear-gradient(45deg, #34c6eb 30%, #346eeb 90%)', height: "100%" }}> */}
 
       <div className='formContainer'>
         <div className='loginTitle'>
