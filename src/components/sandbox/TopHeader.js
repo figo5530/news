@@ -36,7 +36,7 @@ export default function TopHeader() {
       }
 
       <div style={{float : 'right'}}>
-        Welcome back {username}
+        <span>Welcome back, <span style={{color: "#1890ff"}}> {username} </span></span> 
         <Dropdown overlay={menu}>
           {/* <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
             Hover me <DownOutlined />

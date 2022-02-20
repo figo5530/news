@@ -17,12 +17,13 @@ export default function UserList() {
   const addForm = useRef(null)
   const updateForm = useRef(null)
   const { confirm } = Modal
+  const {roleId, region, username} = JSON.parse(localStorage.getItem("token"))
 
   useEffect(() => {
     axios.get("http://localhost:5000/users?_expand=role").then(res => {
-      setDataSource(res.data)
+      setDataSource(roleId === 1 ? res.data : [...res.data.filter(item => item.username === username), ...res.data.filter(item => item.region === region && item.roleId === 3)])
     })
-  }, [])
+  }, [roleId, region, username])
 
   useEffect(() => {
     axios.get("http://localhost:5000/roles").then(res => {
