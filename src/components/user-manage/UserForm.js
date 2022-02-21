@@ -28,6 +28,23 @@ const UserForm = forwardRef((props, ref) => {
         }
     }
 
+    const checkRoleDisabled = item => {
+        console.log(item.id)
+        if (props.isUpdate) {
+            if (roleId === 1) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            if (roleId === 1) {
+                return false
+            } else {
+                return item.id !== 3
+            }
+        }
+    }
+
     return (
         <div>
             <Form
@@ -74,7 +91,7 @@ const UserForm = forwardRef((props, ref) => {
                         }
                         else setIsDisabled(false)
                     }}>
-                        {props.roleList.map(item => <Option value={item.id} key={item.id}>{item.roleName}</Option>)}
+                        {props.roleList.map(item => <Option value={item.id} key={item.id} disabled={checkRoleDisabled(item)}>{item.roleName}</Option>)}
                     </Select>
                 </Form.Item>
             </Form>
