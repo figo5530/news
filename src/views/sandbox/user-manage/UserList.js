@@ -207,7 +207,7 @@ export default function UserList() {
         }}
         onOk={() => handleUpdateForm()}
       >
-        <UserForm regionList={regionList} roleList={roleList} ref={updateForm} isUpdateDisabled={isUpdateDisabled}/>
+        <UserForm regionList={regionList} roleList={roleList} ref={updateForm} isUpdate={true} isUpdateDisabled={isUpdateDisabled}/>
       </Modal>
     </div>
 

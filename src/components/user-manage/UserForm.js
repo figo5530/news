@@ -8,7 +8,25 @@ const UserForm = forwardRef((props, ref) => {
 
     useEffect(() => {
         setIsDisabled(props.isUpdateDisabled)
-    },[props.isUpdateDisabled])
+    }, [props.isUpdateDisabled])
+
+    const { roleId, region } = JSON.parse(localStorage.getItem("token"))
+
+    const chechRegionDisabled = (item) => {
+        if (props.isUpdate) {
+            if (roleId === 1) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            if (roleId === 1) {
+                return false
+            } else {
+                return item.value !== region
+            }
+        }
+    }
 
     return (
         <div>
@@ -38,7 +56,7 @@ const UserForm = forwardRef((props, ref) => {
                     rules={isDisabled ? [] : [{ required: true, message: 'Please select the region!' }]}
                 >
                     <Select disabled={isDisabled}>
-                        {props.regionList.map(item => <Option value={item.value} key={item.id}>{item.title}</Option>)}
+                        {props.regionList.map(item => <Option value={item.value} key={item.id} disabled={chechRegionDisabled(item)}>{item.title}</Option>)}
                     </Select>
                 </Form.Item>
 
@@ -48,9 +66,9 @@ const UserForm = forwardRef((props, ref) => {
                     rules={[{ required: true, message: 'Please select the role!' }]}
                 >
                     <Select onChange={(value) => {
-                        if(value === 1) {
+                        if (value === 1) {
                             ref.current.setFieldsValue({
-                                region:""
+                                region: ""
                             })
                             setIsDisabled(true)
                         }
