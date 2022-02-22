@@ -41,12 +41,25 @@ export default function NewsRouter() {
         })
     }, [])
 
+    const checkRoute = item => {
+        return item.pagepermission && LocalRouterMap[item.key]
+    }
+
+    const {role: {rights}} = JSON.parse(localStorage.getItem("token"))
+
+    const checkUserPermission = item => {
+        return rights.includes(item.key)
+    }
+
     return (
         <div>
             <Routes>
                 {
                     backendRouteList.map(item => {
-                        return <Route path={item.key} element={LocalRouterMap[item.key]} key={item.key} />
+                        if(checkRoute(item) && checkUserPermission(item)) {
+                            return <Route path={item.key} element={LocalRouterMap[item.key]} key={item.key} />
+                        }
+                        return null
                     })
                 }
                 <Route path='/' element={<Navigate replace to='/home' />} />

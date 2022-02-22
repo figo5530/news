@@ -277,12 +277,12 @@
         "/news-manage/news/preview/:id",
         "/news-manage/news/draft",
         "/audit-manage/",
-        "/audit-manage/audit/list",
         "/publish-manage",
         "/publish-manage/unpublished",
         "/publish-manage/published",
         "/publish-manage/archived",
-        "/home"
+        "/home",
+        "/audit-manage/audit/news"
       ]
     }
   ],
