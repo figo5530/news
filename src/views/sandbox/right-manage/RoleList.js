@@ -95,7 +95,6 @@ export default function RoleList() {
   }
 
   const handleCheck = (checkKeys) => {
-    console.log(checkKeys)
     setCurrentRights(checkKeys.checked)
   }
 
