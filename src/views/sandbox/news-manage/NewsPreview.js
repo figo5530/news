@@ -39,6 +39,17 @@ export default function NewsPreview() {
           </Descriptions>
         </PageHeader>
       }
+      {
+        newsInfo && <div style={{
+          margin: "0 24px"
+          
+        }} dangerouslySetInnerHTML={{
+          __html: newsInfo.content
+        }}>
+
+        </div>
+      }
+
     </div>
   )
 }
