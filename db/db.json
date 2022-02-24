@@ -136,15 +136,17 @@
       "id": 17,
       "title": "update News",
       "rightId": 14,
-      "key": "/news-manage/news/update",
-      "grade": 2
+      "key": "/news-manage/news/update/:id",
+      "grade": 2,
+      "routepermission": 1
     },
     {
       "id": 18,
       "title": "News Preview",
       "rightId": 14,
-      "key": "/news-manage/news/preview",
-      "grade": 2
+      "key": "/news-manage/news/preview/:id",
+      "grade": 2,
+      "routepermission": 1
     },
     {
       "id": 19,
@@ -223,8 +225,8 @@
         "/news-manage",
         "/news-manage/news/list",
         "/news-manage/news/write",
-        "/news-manage/news/update",
-        "/news-manage/news/preview",
+        "/news-manage/news/update/:id",
+        "/news-manage/news/preview/:id",
         "/news-manage/news/draft",
         "/news-manage/news/category",
         "/audit-manage",
@@ -428,20 +430,6 @@
       "publishTime": 1615778496314
     },
     {
-      "title": "test",
-      "categoryId": 5,
-      "content": "<p>test press</p>\n",
-      "region": "Global",
-      "author": "admin",
-      "roleId": 1,
-      "auditState": 0,
-      "publishState": 0,
-      "createTime": 1645673238873,
-      "star": 0,
-      "view": 0,
-      "id": 3
-    },
-    {
       "title": "test1",
       "categoryId": 2,
       "content": "<p>test audit</p>\n",
@@ -454,6 +442,34 @@
       "star": 0,
       "view": 0,
       "id": 4
+    },
+    {
+      "title": "This is a test news",
+      "categoryId": 5,
+      "content": "<ol>\n<li>This</li>\n<li>is</li>\n<li>a</li>\n<li>news</li>\n<li>!!!!</li>\n</ol>\n",
+      "region": "Global",
+      "author": "admin",
+      "roleId": 1,
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1645674737099,
+      "star": 0,
+      "view": 0,
+      "id": 5
+    },
+    {
+      "title": "ccc",
+      "categoryId": 3,
+      "content": "<p>ccc</p>\n",
+      "region": "Global",
+      "author": "admin",
+      "roleId": 1,
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1645728709748,
+      "star": 0,
+      "view": 0,
+      "id": 6
     }
   ]
 }

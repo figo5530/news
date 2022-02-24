@@ -28,6 +28,9 @@ export default function NewsDraft() {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
+      render: (title, item) => {
+        return <a href={`#/news-manage/news/preview/${item.id}`}>{title}</a>
+      }
     },
     {
       title: 'Author',
@@ -76,7 +79,8 @@ export default function NewsDraft() {
 
   return (
     <div>
-      <Table dataSource={dataSource} columns={columns} rowKey={item => item.id} pagination={{pageSize: 5}}></Table>
+      
+      <Table dataSource={dataSource} columns={columns} rowKey={item => item.id} pagination={{ pageSize: 5 }}></Table>
     </div>
   )
 }
