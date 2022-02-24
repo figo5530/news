@@ -8,6 +8,7 @@ import NewsWrite from '../../views/sandbox/news-manage/NewsWrite'
 import NewsDraft from '../../views/sandbox/news-manage/NewsDraft'
 import NewsPreview from '../../views/sandbox/news-manage/NewsPreview'
 import NewsCategory from '../../views/sandbox/news-manage/NewsCategory'
+import NewsUpdate from '../../views/sandbox/news-manage/NewsUpdate'
 import Audit from '../../views/sandbox/audit-manage/Audit'
 import AuditList from '../../views/sandbox/audit-manage/AuditList'
 import Published from '../../views/sandbox/publish-manage/Published'
@@ -23,6 +24,7 @@ const LocalRouterMap = {
     "/right-manage/right/list": <RightList />,
     "/news-manage/news/write": <NewsWrite />,
     "/news-manage/news/draft": <NewsDraft />,
+    "/news-manage/news/update/:id": <NewsUpdate />,
     "/news-manage/news/preview/:id": <NewsPreview />,
     "/news-manage/news/category": <NewsCategory />,
     "/audit-manage/audit/news": <Audit />,
