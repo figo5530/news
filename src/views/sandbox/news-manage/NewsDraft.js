@@ -1,11 +1,13 @@
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { DeleteOutlined, ToTopOutlined, EditOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ToTopOutlined, EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 
 export default function NewsDraft() {
+
   const [dataSource, setDataSource] = useState([])
   const { username } = JSON.parse(localStorage.getItem("token"))
+  const { confirm } = Modal
 
   useEffect(() => {
     axios.get(`http://localhost:5000/news?author=${username}&auditState=0&_expand=category`).then(res => {
@@ -46,13 +48,31 @@ export default function NewsDraft() {
         return (
           <div>
             <Button type='secondary' shape='circle' icon={<EditOutlined />} style={{ marginRight: '5px' }} />
-            <Button danger shape='circle' icon={<DeleteOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} />
+            <Button danger shape='circle' onClick={() => showConfirm(item)} icon={<DeleteOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} />
             <Button type='primary' shape='circle' icon={<ToTopOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} />
           </div>
         )
       }
     }
   ]
+
+  const showConfirm = (item) => {
+    confirm({
+      title: 'Do you Want to delete this news?',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Some descriptions',
+      onOk() {
+        deleteMethod(item)
+      },
+      onCancel() {
+      },
+    });
+  }
+
+  const deleteMethod = item => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.delete(`http://localhost:5000/news/${item.id}`)
+  }
 
   return (
     <div>
