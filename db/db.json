@@ -373,5 +373,42 @@
       "title": "Oceania",
       "value": "Oceania"
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "World News",
+      "value": "World News"
+    },
+    {
+      "id": 2,
+      "title": "National News",
+      "value": "National News"
+    },
+    {
+      "id": 3,
+      "title": "Business",
+      "value": "Business"
+    },
+    {
+      "id": 4,
+      "title": "Sports",
+      "value": "Sports"
+    },
+    {
+      "id": 5,
+      "title": "Special",
+      "value": "Special"
+    },
+    {
+      "id": 6,
+      "title": "Editorials",
+      "value": "Editorials"
+    },
+    {
+      "id": 7,
+      "title": "Advertisement",
+      "value": "Advertisement"
+    }
   ]
 }
