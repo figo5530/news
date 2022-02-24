@@ -9,6 +9,7 @@ import 'nprogress/nprogress.css'
 const { Content } = Layout
 
 export default function NewsSandBox() {
+    //top progress bar
     NProgress.start()
     useEffect(() => {
         NProgress.done()
