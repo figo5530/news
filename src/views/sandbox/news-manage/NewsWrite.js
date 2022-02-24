@@ -1,26 +1,35 @@
 import React, { useEffect, useRef } from 'react'
-import { Button, PageHeader, Steps, Form, Input, Select } from 'antd'
+import { Button, PageHeader, Steps, Form, Input, Select, message, notification } from 'antd'
 import { useState } from 'react'
 import style from './News.module.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import NewsEditor from '../../../components/news-manage/NewsEditor'
 
 export default function NewsWrite() {
-
+  let navigate = useNavigate()
   const { Option } = Select
   const { Step } = Steps
   const [currentStep, setCurrentStep] = useState(0)
   const [categoryList, setCategoryList] = useState([])
+  const [formInfo, setFormInfo] = useState({})
+  const [content, setContent] = useState("")
+  const User = JSON.parse(localStorage.getItem("token"))
 
   const handleNext = () => {
     if(currentStep === 0) {
       NewsForm.current.validateFields().then(res => {
+        setFormInfo(res)
         setCurrentStep(currentStep + 1)
       }).catch(error => {
         console.log(error)
       })
     }else {
-      setCurrentStep(currentStep + 1)
+      if(content === "" || content.trim() === "<p></p>") {
+        message.error("Write something please")
+      }else {
+        setCurrentStep(currentStep + 1)
+      }
     }
   }
 
@@ -35,6 +44,29 @@ export default function NewsWrite() {
   }, [])
 
   const NewsForm = useRef(null)
+
+  const handleSave = (auditState) => {
+    axios.post("http://localhost:5000/news", {
+      ...formInfo,
+      "content": content,
+      "region": User.region ? User.region : "Global",
+      "author": User.username,
+      "roleId": User.roleId,
+      "auditState": auditState,
+      "publishState": 0,
+      "createTime": Date.now(),
+      "star": 0,
+      "view": 0,
+      // "publisheTime": 0
+    }).then(res => {
+      auditState === 0 ? navigate('/news-manage/news/draft') : navigate('/audit-manage/audit/list')
+      notification.info({
+        message: "Notification",
+        description: `Now you can check your press in ${auditState === 0 ? 'Draft' : 'Audit list'}`,
+        placement: "bottomRight"
+      })
+    })
+  }
 
   return (
     <div>
@@ -99,17 +131,18 @@ export default function NewsWrite() {
         </div>
         <div className={currentStep === 1 ? '' : style.active}>
           <NewsEditor getContent={(value) => {
-            console.log(value)
+            // console.log(value)
+            setContent(value)
           }}/>
         </div>
-        <div className={currentStep === 2 ? '' : style.active}><input /></div>
+        <div className={currentStep === 2 ? '' : style.active}></div>
       </div>
 
       <div style={{ marginTop: '50px' }}>
         {
           currentStep === 2 && <span>
-            <Button type='primary'>Save in Draft</Button>
-            <Button danger>Submit</Button>
+            <Button type='primary' onClick={() => handleSave(0)}>Save in Draft</Button>
+            <Button danger onClick={() => handleSave(1)}>Submit</Button>
           </span>
         }
         {
