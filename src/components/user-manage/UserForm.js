@@ -29,7 +29,6 @@ const UserForm = forwardRef((props, ref) => {
     }
 
     const checkRoleDisabled = item => {
-        console.log(item.id)
         if (props.isUpdate) {
             if (roleId === 1) {
                 return false

@@ -3,6 +3,7 @@ import { Button, PageHeader, Steps, Form, Input, Select } from 'antd'
 import { useState } from 'react'
 import style from './News.module.css'
 import axios from 'axios'
+import NewsEditor from '../../../components/news-manage/NewsEditor'
 
 export default function NewsWrite() {
 
@@ -30,8 +31,8 @@ export default function NewsWrite() {
   useEffect(() => {
     axios.get("http://localhost:5000/categories").then(res => {
       setCategoryList(res.data)
-    }, [])
-  })
+    })
+  }, [])
 
   const NewsForm = useRef(null)
 
@@ -54,7 +55,7 @@ export default function NewsWrite() {
           <Form
             name="basic"
             labelCol={{
-              span: 2,
+              span: 2, 
             }}
             wrapperCol={{
               span: 22,
@@ -96,7 +97,11 @@ export default function NewsWrite() {
 
           </Form>
         </div>
-        <div className={currentStep === 1 ? '' : style.active}><input /></div>
+        <div className={currentStep === 1 ? '' : style.active}>
+          <NewsEditor getContent={(value) => {
+            console.log(value)
+          }}/>
+        </div>
         <div className={currentStep === 2 ? '' : style.active}><input /></div>
       </div>
 

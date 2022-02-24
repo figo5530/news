@@ -77,11 +77,9 @@ export default function RightList() {
       icon: <ExclamationCircleOutlined />,
       content: 'Some descriptions',
       onOk() {
-        // console.log('OK');
         deleteMethod(item)
       },
       onCancel() {
-        // console.log('Cancel');
       },
     });
   }

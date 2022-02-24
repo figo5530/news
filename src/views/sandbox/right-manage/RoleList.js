@@ -72,7 +72,6 @@ export default function RoleList() {
   }
 
   const handleOk = () => {
-    console.log(currentRights)
     setIsModalVisible(false)
     //update current right
     setDataSource(dataSource.map(item => {
