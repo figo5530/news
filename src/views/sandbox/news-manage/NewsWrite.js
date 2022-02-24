@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Button, PageHeader, Steps, Form, Input, Select } from 'antd'
 import { useState } from 'react'
 import style from './News.module.css'
@@ -12,7 +12,15 @@ export default function NewsWrite() {
   const [categoryList, setCategoryList] = useState([])
 
   const handleNext = () => {
-    setCurrentStep(currentStep + 1)
+    if(currentStep === 0) {
+      NewsForm.current.validateFields().then(res => {
+        setCurrentStep(currentStep + 1)
+      }).catch(error => {
+        console.log(error)
+      })
+    }else {
+      setCurrentStep(currentStep + 1)
+    }
   }
 
   const handlePrevious = () => {
@@ -24,6 +32,9 @@ export default function NewsWrite() {
       setCategoryList(res.data)
     }, [])
   })
+
+  const NewsForm = useRef(null)
+
   return (
     <div>
       <PageHeader
@@ -49,10 +60,7 @@ export default function NewsWrite() {
               span: 22,
             }}
             labelAlign="left"
-          // initialValues={{
-          //   remember: true,
-          // }}
-          // autoComplete="off"
+            ref={NewsForm}
           >
             <Form.Item
               label="Title"
