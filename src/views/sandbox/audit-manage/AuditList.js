@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Table } from 'antd'
+import { Button, Table, Tag } from 'antd'
 
 export default function AuditList() {
 
@@ -39,7 +39,9 @@ export default function AuditList() {
       dataIndex: 'auditState',
       key: 'auditState',
       render: auditState => {
-        return <div>{auditState}</div>
+        const colorList = ['', 'orange', 'green', 'red']
+        const auditList = ["Unaudited", "Auditing", "Approved", "Disapproved"]
+        return <Tag color={colorList[auditState]}>{auditList[auditState]}</Tag>
       }
     },
     {
@@ -47,7 +49,15 @@ export default function AuditList() {
       render: (item) => {
         return (
           <div>
-            <Button type='primary'>Publish</Button>
+            {
+              item.auditState === 1 && <Button type='secondary'>Withdraw</Button>
+            }
+            {
+              item.auditState === 2 && <Button type='primary'>Publish</Button>
+            }
+            {
+              item.auditState === 3 && <Button danger>Update</Button>
+            }
           </div>
         )
       }

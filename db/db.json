@@ -470,6 +470,20 @@
       "star": 0,
       "view": 0,
       "id": 7
+    },
+    {
+      "title": "test label",
+      "categoryId": 3,
+      "content": "<p>Label testing</p>\n",
+      "region": "Global",
+      "author": "admin",
+      "roleId": 1,
+      "auditState": 0,
+      "publishState": 0,
+      "createTime": 1645996316779,
+      "star": 0,
+      "view": 0,
+      "id": 8
     }
   ]
 }

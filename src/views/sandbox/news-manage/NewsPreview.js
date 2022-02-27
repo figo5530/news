@@ -15,8 +15,9 @@ export default function NewsPreview() {
     })
   }, [location.pathname])
 
-  const auditList = ["Unaudited", "Audited", "Approved", "Disapproved"]
+  const auditList = ["Unaudited", "Auditing", "Approved", "Disapproved"]
   const publishList = ["Unpublished", "Waiting", "Published", "Archived"]
+  const colorList = ["black", "orange", "green", "red"]
   return (
     <div>
       {
@@ -30,8 +31,8 @@ export default function NewsPreview() {
             <Descriptions.Item label="Creation Time">{moment(newsInfo.createTime).format("MM/DD/YYYY HH:mm:ss")}</Descriptions.Item>
             <Descriptions.Item label="Publish Time">{newsInfo.publishTime ? moment(newsInfo.createTime).format("MM/DD/YYYY HH:mm:ss") : "-"}</Descriptions.Item>
             <Descriptions.Item label="Region">{newsInfo.region}</Descriptions.Item>
-            <Descriptions.Item label="Audit Status"><span style={{ color: "red" }}>{auditList[newsInfo.auditState]}</span></Descriptions.Item>
-            <Descriptions.Item label="Publish Status"><span style={{ color: "red" }}>{publishList[newsInfo.publishState]}</span></Descriptions.Item>
+            <Descriptions.Item label="Audit Status"><span style={{ color: colorList[newsInfo.auditState] }}>{auditList[newsInfo.auditState]}</span></Descriptions.Item>
+            <Descriptions.Item label="Publish Status"><span style={{ color: colorList[newsInfo.publishState] }}>{publishList[newsInfo.publishState]}</span></Descriptions.Item>
             <Descriptions.Item label="Viewed">{newsInfo.view}</Descriptions.Item>
             <Descriptions.Item label="Stars">{newsInfo.star}</Descriptions.Item>
             <Descriptions.Item label="Comments">0</Descriptions.Item>
