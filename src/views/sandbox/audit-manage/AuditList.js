@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Table, Tag } from 'antd'
+import { Button, Table, Tag, notification } from 'antd'
 
 export default function AuditList() {
 
@@ -50,7 +50,7 @@ export default function AuditList() {
         return (
           <div>
             {
-              item.auditState === 1 && <Button type='secondary'>Withdraw</Button>
+              item.auditState === 1 && <Button type='secondary' onClick={() => handleWithdraw(item)}>Withdraw</Button>
             }
             {
               item.auditState === 2 && <Button type='primary'>Publish</Button>
@@ -63,6 +63,20 @@ export default function AuditList() {
       }
     }
   ]
+
+  const handleWithdraw = item => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.patch(`http://localhost:5000/news/${item.id}`, {
+      auditState: 0
+    }).then(res => {
+      notification.info({
+        message: "Notification",
+        description: `Now you can check your press in Draft Box`,
+        placement: "bottomRight"
+      })
+    })
+  }
+
   return (
     <div>
       <Table dataSource={dataSource} columns={columns} rowKey={item => item.id} pagination={{ pageSize: 5 }}></Table>

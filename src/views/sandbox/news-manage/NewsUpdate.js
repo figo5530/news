@@ -72,7 +72,7 @@ export default function NewsUpdate() {
             auditState === 0 ? navigate('/news-manage/news/draft') : navigate('/audit-manage/audit/list')
             notification.info({
                 message: "Notification",
-                description: `Now you can check your press in ${auditState === 0 ? 'Draft' : 'Audit list'}`,
+                description: `Now you can check your press in ${auditState === 0 ? 'Draft Box' : 'Audit list'}`,
                 placement: "bottomRight"
             })
         })

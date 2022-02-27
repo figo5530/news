@@ -67,7 +67,7 @@ export default function NewsDraft() {
       navigate('/audit-manage/audit/list')
       notification.info({
           message: "Notification",
-          description: `Now you can check your press in 'Audit list'}`,
+          description: `Now you can check your press in Audit list`,
           placement: "bottomRight"
       })
   })
