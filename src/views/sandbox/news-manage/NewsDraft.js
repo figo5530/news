@@ -1,4 +1,4 @@
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, notification } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { DeleteOutlined, ToTopOutlined, EditOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
@@ -53,12 +53,25 @@ export default function NewsDraft() {
           <div>
             <Button type='secondary' shape='circle' icon={<EditOutlined />} style={{ marginRight: '5px' }} onClick={() => navigate(`/news-manage/news/update/${item.id}`)} />
             <Button danger shape='circle' onClick={() => showConfirm(item)} icon={<DeleteOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} />
-            <Button type='primary' shape='circle' icon={<ToTopOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} />
+            <Button type='primary' shape='circle' icon={<ToTopOutlined />} style={{ marginLeft: '5px', marginRight: '5px' }} onClick={() => handleAudit(item.id)}/>
           </div>
         )
       }
     }
   ]
+
+  const handleAudit = id => {
+    axios.patch(`http://localhost:5000/news/${id}`, {
+      auditState: 1
+    }).then(res => {
+      navigate('/audit-manage/audit/list')
+      notification.info({
+          message: "Notification",
+          description: `Now you can check your press in 'Audit list'}`,
+          placement: "bottomRight"
+      })
+  })
+  }
 
   const showConfirm = (item) => {
     confirm({
