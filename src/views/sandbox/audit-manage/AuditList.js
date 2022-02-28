@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Table, Tag, notification } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 export default function AuditList() {
 
+  let navigate = useNavigate()
   const { username } = JSON.parse(localStorage.getItem("token"))
   const [dataSource, setDataSource] = useState([])
   useEffect(() => {
@@ -53,10 +55,10 @@ export default function AuditList() {
               item.auditState === 1 && <Button type='secondary' onClick={() => handleWithdraw(item)}>Withdraw</Button>
             }
             {
-              item.auditState === 2 && <Button type='primary'>Publish</Button>
+              item.auditState === 2 && <Button type='primary'>&nbsp; Publish &nbsp;</Button>
             }
             {
-              item.auditState === 3 && <Button danger>Update</Button>
+              item.auditState === 3 && <Button danger onClick={() => handleUpdate(item)}>&nbsp; Update &nbsp;</Button>
             }
           </div>
         )
@@ -75,6 +77,10 @@ export default function AuditList() {
         placement: "bottomRight"
       })
     })
+  }
+
+  const handleUpdate = item => {
+    navigate(`/news-manage/news/update/${item.id}`)
   }
 
   return (
