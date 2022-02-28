@@ -55,7 +55,7 @@ export default function AuditList() {
               item.auditState === 1 && <Button type='secondary' onClick={() => handleWithdraw(item)}>Withdraw</Button>
             }
             {
-              item.auditState === 2 && <Button type='primary'>&nbsp; Publish &nbsp;</Button>
+              item.auditState === 2 && <Button type='primary' onClick={() => handlePublish(item)}>&nbsp; Publish &nbsp;</Button>
             }
             {
               item.auditState === 3 && <Button danger onClick={() => handleUpdate(item)}>&nbsp; Update &nbsp;</Button>
@@ -81,6 +81,19 @@ export default function AuditList() {
 
   const handleUpdate = item => {
     navigate(`/news-manage/news/update/${item.id}`)
+  }
+
+  const handlePublish = item => {
+    axios.patch(`http://localhost:5000/news/${item.id}`, {
+      publishState: 2
+    }).then(res => {
+      navigate('/publish-manage/published')
+      notification.info({
+        message: "Notification",
+        description: `Now you can check your press in Published`,
+        placement: "bottomRight"
+      })
+    })
   }
 
   return (
