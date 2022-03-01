@@ -93,7 +93,6 @@ export default function NewsDraft() {
 
   return (
     <div>
-      
       <Table dataSource={dataSource} columns={columns} rowKey={item => item.id} pagination={{ pageSize: 5 }}></Table>
     </div>
   )
