@@ -16,17 +16,21 @@ export default function NewsCategory() {
 
   const handleSave = (record) => {
     console.log(record)
-  //   setDataSource(dataSource.map(data => {
-  //     if(data.id === record.id) {
-  //       return {
-  //         id: data.id,
-  //         title: record.title,
-  //         value: record.title,
-  //       }
-  //     }
-  //     return data
-  //   }))
-  // }
+    setDataSource(dataSource.map(data => {
+      if(data.id === record.id) {
+        return {
+          id: data.id,
+          title: record.title,
+          value: record.title,
+        }
+      }
+      return data
+    }))
+    axios.patch(`http://localhost:5000/categories/${record.id}`, {
+      title: record.title,
+      value: record.title
+    })
+  }
 
   const columns = [
     {
