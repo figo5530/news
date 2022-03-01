@@ -10,6 +10,7 @@ export default function AuditList() {
   const [dataSource, setDataSource] = useState([])
   useEffect(() => {
     axios.get(`http://localhost:5000/news?author=${username}&auditState_ne=0&publishState_lte=1&_expand=category`).then(res => {
+      
       setDataSource(res.data)
     })
   }, [username])

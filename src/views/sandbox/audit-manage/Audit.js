@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Button, Table } from 'antd'
+import { Button, notification, Table } from 'antd'
 
 export default function Audit() {
 
@@ -44,13 +44,41 @@ export default function Audit() {
       render: (item) => {
         return (
           <div>
-            <Button>Approve</Button>
-            <Button>Reject</Button>
+            <Button onClick={() => handleAudit(item)}>Approve</Button>
+            <Button onClick={() => handleReject(item)}>Reject</Button>
           </div>
         )
       }
     }
   ]
+
+  const handleAudit = item => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.patch(`http://localhost:5000/news/${item.id}`, {
+      auditState: 2,
+      publishState: 1
+    }).then(res => {
+      notification.info({
+        message: "Notification",
+        description: `Now you can check your press in News`,
+        placement: "bottomRight"
+      })
+    })
+  }
+  
+  const handleReject = item => {
+    setDataSource(dataSource.filter(data => data.id !== item.id))
+    axios.patch(`http://localhost:5000/news/${item.id}`, {
+      auditState: 3,
+      publishState: 0
+    }).then(res => {
+      notification.info({
+        message: "Notification",
+        description: `Now you can check your press in Draft Box`,
+        placement: "bottomRight"
+      })
+    })
+  }
 
   return (
     <div>
