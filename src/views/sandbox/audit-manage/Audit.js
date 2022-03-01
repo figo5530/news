@@ -9,7 +9,6 @@ export default function Audit() {
   useEffect(() => {
     axios.get("http://localhost:5000/news?auditState=1&_expand=category").then(res => {
       const list = res.data
-      console.log(list)
       setDataSource(roleId === 1 ? list : [
         ...list.filter(item => item.author === username),
         ...list.filter(item => item.region === region && item.roleId === 3)

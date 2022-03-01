@@ -10,7 +10,6 @@ export default function NewsPreview() {
   const [newsInfo, setNewsInfo] = useState(null)
   useEffect(() => {
     axios.get(`http://localhost:5000/news/${location.pathname.split("/")[4]}?_expand=category&_expand=role`).then(res => {
-      console.log(res.data)
       setNewsInfo(res.data)
     })
   }, [location.pathname])
