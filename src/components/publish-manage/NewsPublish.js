@@ -25,10 +25,10 @@ export default function NewsPublish(props) {
         },
         {
             title: "Operation",
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        {button}
+                        {button(item.id)}
                     </div>
                 )
             }

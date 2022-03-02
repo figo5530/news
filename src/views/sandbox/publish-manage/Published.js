@@ -5,11 +5,19 @@ import { Button } from 'antd'
 
 export default function Published() {
 
-  const {dataSource} = usePublish(2)
+  const { dataSource, handleArchive } = usePublish(2)
 
   return (
     <div>
-      <NewsPublish dataSource={dataSource} button={<Button danger>Archive</Button>}/>
+      <NewsPublish
+        dataSource={dataSource}
+        button={id => {
+          return <Button onClick={() => handleArchive(id)}
+            danger
+            >
+            Archive
+          </Button>
+        }} />
     </div>
   )
 }

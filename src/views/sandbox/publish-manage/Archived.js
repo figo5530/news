@@ -5,11 +5,19 @@ import { Button } from 'antd'
 
 export default function Archived() {
 
-  const {dataSource} = usePublish(3)
+  const { dataSource, handleDelete } = usePublish(3)
 
   return (
     <div>
-      <NewsPublish dataSource={dataSource} button={<Button danger>Delete</Button>}/>
+      <NewsPublish
+        dataSource={dataSource}
+        button={id => {
+          return <Button onClick={() => handleDelete(id)}
+            danger
+          >
+            Delete
+          </Button>
+        }} />
     </div>
   )
 }
