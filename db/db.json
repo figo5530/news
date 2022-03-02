@@ -466,7 +466,7 @@
       "author": "admin",
       "roleId": 1,
       "auditState": 2,
-      "publishState": 2,
+      "publishState": 3,
       "createTime": 1645929773263,
       "star": 0,
       "view": 0,
@@ -494,11 +494,12 @@
       "author": "test",
       "roleId": 2,
       "auditState": 2,
-      "publishState": 1,
+      "publishState": 2,
       "createTime": 1646099567386,
       "star": 0,
       "view": 0,
-      "id": 9
+      "id": 9,
+      "publishTime": 1646186448540
     },
     {
       "title": "region editor test",
