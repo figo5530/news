@@ -9,7 +9,7 @@ export default function NewsPublish(props) {
             title: "Title",
             dataIndex: "title",
             render: (title, item) => {
-                return <a href={`/news-manage/news/preview/${item.id}`}>{title}</a>
+                return <a href={`#/news-manage/news/preview/${item.id}`}>{title}</a>
             }
         },
         {
