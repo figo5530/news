@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button, Table } from 'antd'
+import { Table } from 'antd'
 
 
 export default function NewsPublish(props) {
-    const { dataSource } = props
+    const { dataSource, button } = props
     const columns = [
         {
             title: "Title",
@@ -28,7 +28,7 @@ export default function NewsPublish(props) {
             render: () => {
                 return (
                     <div>
-                        <Button type='primary'>Button</Button>
+                        {button}
                     </div>
                 )
             }

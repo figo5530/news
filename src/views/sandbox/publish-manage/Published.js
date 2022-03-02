@@ -1,6 +1,7 @@
 import React from 'react'
 import NewsPublish from '../../../components/publish-manage/NewsPublish'
 import usePublish from '../../../components/publish-manage/usePublish'
+import { Button } from 'antd'
 
 export default function Published() {
 
@@ -8,7 +9,7 @@ export default function Published() {
 
   return (
     <div>
-      <NewsPublish dataSource={dataSource}/>
+      <NewsPublish dataSource={dataSource} button={<Button danger>Archive</Button>}/>
     </div>
   )
 }
