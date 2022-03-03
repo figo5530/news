@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd'
-import {
-  UserOutlined,
-  SettingOutlined,
-  AuditOutlined,
-  FileSearchOutlined,
-  HomeOutlined,
-  SendOutlined,
-  FieldTimeOutlined,
-  PaperClipOutlined
-} from '@ant-design/icons';
+import iconList from './icon'
 import './SideMenu.css'
 import { useLocation, useNavigate } from 'react-router-dom'
 import MenuItem from 'antd/lib/menu/MenuItem';
@@ -37,26 +28,6 @@ function SideMenu(props) {
 
   const checkPagePermission = item => {
     return item.pagepermission && rights.includes(item.key)
-  }
-
-  const iconList = {
-    "/home": <HomeOutlined />,
-    "/user-manage": <SettingOutlined />,
-    "/right-manage": <SettingOutlined />,
-    "/news-manage": <SettingOutlined />,
-    "/audit-manage": <SettingOutlined />,
-    "/publish-manage": <SettingOutlined />,
-    "/user-manage/list": <UserOutlined />,
-    "/right-manage/role/list": <UserOutlined />,
-    "/right-manage/right/list": <UserOutlined />,
-    "/news-manage/news/write": <SettingOutlined />,
-    "/news-manage/news/draft": <SettingOutlined />,
-    "/news-manage/news/category": <SettingOutlined />,
-    "/audit-manage/audit/news": <FileSearchOutlined />,
-    "/audit-manage/audit/list": <AuditOutlined />,
-    "/publish-manage/unpublished": <FieldTimeOutlined />,
-    "/publish-manage/published": <SendOutlined />,
-    "/publish-manage/archived": <PaperClipOutlined />,
   }
 
   const renderMenu = (list) => {
