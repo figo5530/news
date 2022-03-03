@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 const { Header } = Layout;
 
 function TopHeader(props) {
-  // const [collapsed, setCollapsed] = useState(false)
   const changeCollapsed = () => {
     props.changeCollapsed()
   }
