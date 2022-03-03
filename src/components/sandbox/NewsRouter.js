@@ -16,6 +16,8 @@ import Unpublished from '../../views/sandbox/publish-manage/Unpublished'
 import Archived from '../../views/sandbox/publish-manage/Archived'
 import NoPermission from '../../views/sandbox/noPermission/NoPermission';
 import axios from 'axios';
+import { Spin } from 'antd';
+import { connect } from 'react-redux'
 
 const LocalRouterMap = {
     "/home": <Home />,
@@ -34,7 +36,8 @@ const LocalRouterMap = {
     "/publish-manage/archived": <Archived />
 }
 
-export default function NewsRouter() {
+function NewsRouter(props) {
+    console.log(props)
     const [backendRouteList, setBackendRouteList] = useState([])
     useEffect(() => {
         Promise.all([
@@ -49,18 +52,18 @@ export default function NewsRouter() {
         return (item.pagepermission || item.routepermission) && LocalRouterMap[item.key]
     }
 
-    const {role: {rights}} = JSON.parse(localStorage.getItem("token"))
+    const { role: { rights } } = JSON.parse(localStorage.getItem("token"))
 
     const checkUserPermission = item => {
         return rights.includes(item.key)
     }
 
     return (
-        <div>
+        <Spin size='large' spinning={props.isLoading}>
             <Routes>
                 {
                     backendRouteList.map(item => {
-                        if(checkRoute(item) && checkUserPermission(item)) {
+                        if (checkRoute(item) && checkUserPermission(item)) {
                             return <Route path={item.key} element={LocalRouterMap[item.key]} key={item.key} />
                         }
                         return null
@@ -71,6 +74,14 @@ export default function NewsRouter() {
                     backendRouteList.length > 0 && <Route path='*' element={<NoPermission />} />
                 }
             </Routes>
-        </div>
+        </Spin>
     )
 }
+
+const mapStateToProps = ({ LoadingReducer: { isLoading } }) => {
+    return {
+        isLoading
+    }
+}
+
+export default connect(mapStateToProps)(NewsRouter)
