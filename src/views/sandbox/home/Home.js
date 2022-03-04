@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, List, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import Charts from './Charts';
 import axios from 'axios'
 const { Meta } = Card
 
 export default function Home() {
   const [viewList, setViewList] = useState([])
   const [starList, setStarList] = useState([])
-  
+  const { username, role: { roleName }, region } = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
     axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6").then(res => {
       setViewList(res.data)
     })
   }, [])
-  
+
   useEffect(() => {
     axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=star&_order=desc&_limit=6").then(res => {
       setStarList(res.data)
@@ -39,7 +40,7 @@ export default function Home() {
         </Col>
         <Col span={8}>
           <Card title="Most Liked" bordered={true}>
-          <List
+            <List
               size="small"
               dataSource={starList}
               renderItem={item => {
@@ -68,12 +69,19 @@ export default function Home() {
           >
             <Meta
               avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-              title="Card title"
-              description="This is the description"
+              title={username}
+              description={
+                <div>
+                  <b>{region ? region : "Global"}</b>
+
+                  <span style={{paddingLeft: "30px"}}>{roleName}</span>
+                </div>
+              }
             />
           </Card>
         </Col>
       </Row>
+      <Charts />
     </div>
   )
 }
