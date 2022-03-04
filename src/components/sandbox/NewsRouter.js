@@ -37,7 +37,6 @@ const LocalRouterMap = {
 }
 
 function NewsRouter(props) {
-    console.log(props)
     const [backendRouteList, setBackendRouteList] = useState([])
     useEffect(() => {
         Promise.all([
