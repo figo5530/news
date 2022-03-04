@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, List, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import axios from 'axios'
 const { Meta } = Card
 
 export default function Home() {
-
+  const [viewList, setViewList] = useState([])
+  useEffect(() => {
+    axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6").then(res => {
+      setViewList(res.data)
+    })
+  }, [])
   return (
     <div className="site-card-wrapper">
       <Row gutter={16}>
@@ -12,8 +18,14 @@ export default function Home() {
           <Card title="Most Viewed" bordered={true}>
             <List
               size="small"
-              dataSource={["111", "222"]}
-              renderItem={item => <List.Item>{item}</List.Item>}
+              dataSource={viewList}
+              renderItem={item => {
+                return (
+                  <List.Item>
+                    <a href={`#/news-manage/news/preview/${item.id}`}>{item.title}</a>
+                  </List.Item>
+                )
+              }}
             />
           </Card>
         </Col>
