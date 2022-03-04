@@ -6,9 +6,17 @@ const { Meta } = Card
 
 export default function Home() {
   const [viewList, setViewList] = useState([])
+  const [starList, setStarList] = useState([])
+  
   useEffect(() => {
     axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6").then(res => {
       setViewList(res.data)
+    })
+  }, [])
+  
+  useEffect(() => {
+    axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=star&_order=desc&_limit=6").then(res => {
+      setStarList(res.data)
     })
   }, [])
   return (
@@ -31,10 +39,16 @@ export default function Home() {
         </Col>
         <Col span={8}>
           <Card title="Most Liked" bordered={true}>
-            <List
+          <List
               size="small"
-              dataSource={["111", "222"]}
-              renderItem={item => <List.Item>{item}</List.Item>}
+              dataSource={starList}
+              renderItem={item => {
+                return (
+                  <List.Item>
+                    <a href={`#/news-manage/news/preview/${item.id}`}>{item.title}</a>
+                  </List.Item>
+                )
+              }}
             />
           </Card>
         </Col>
