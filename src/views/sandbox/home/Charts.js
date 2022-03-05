@@ -12,6 +12,9 @@ function Charts() {
             renderBar(dataObj)
         })
         
+        return () => {
+            window.onresize = null
+        }
     }, [])
 
     const renderBar = (dataObj) => {
@@ -25,9 +28,14 @@ function Charts() {
                 data: ['Quantity']
             },
             xAxis: {
-                data: Object.keys(dataObj)
+                data: Object.keys(dataObj),
+                axisLabel:{
+                    rotate: "30"
+                }
             },
-            yAxis: {},
+            yAxis: {
+                minInterval: 1
+            },
             series: [
                 {
                     name: 'Quantity',
@@ -37,6 +45,11 @@ function Charts() {
             ]
         };
         myChart.setOption(option)
+
+        window.onresize = () => {
+            console.log("resize")
+            myChart.resize()
+        }
     }
 
     return (
