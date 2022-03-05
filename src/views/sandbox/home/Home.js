@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Row, List, Avatar } from 'antd';
+import { Card, Col, Row, List, Avatar, Drawer } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import Charts from './Charts';
+import Pie from './Pie';
 import axios from 'axios'
 const { Meta } = Card
 
 export default function Home() {
   const [viewList, setViewList] = useState([])
   const [starList, setStarList] = useState([])
+  const [visible, setVisible] = useState(false)
   const { username, role: { roleName }, region } = JSON.parse(localStorage.getItem("token"))
   useEffect(() => {
     axios.get("http://localhost:5000/news?publishState=2&_expand=category&_sort=view&_order=desc&_limit=6").then(res => {
@@ -62,7 +64,7 @@ export default function Home() {
               />
             }
             actions={[
-              <SettingOutlined key="setting" />,
+              <SettingOutlined key="setting" onClick={() => setVisible(true)} />,
               <EditOutlined key="edit" />,
               <EllipsisOutlined key="ellipsis" />,
             ]}
@@ -74,13 +76,25 @@ export default function Home() {
                 <div>
                   <b>{region ? region : "Global"}</b>
 
-                  <span style={{paddingLeft: "30px"}}>{roleName}</span>
+                  <span style={{ paddingLeft: "30px" }}>{roleName}</span>
                 </div>
               }
             />
           </Card>
         </Col>
       </Row>
+      <Drawer
+        width="500px"
+        title={`${username}'s category`}
+        placement='right'
+        closable={true}
+        onClose={() => {
+          setVisible(false)
+        }}
+        visible={visible}
+      >
+        <Pie username={username}/>
+      </Drawer>
       <Charts />
     </div>
   )
