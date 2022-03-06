@@ -59,8 +59,10 @@ export default function Home() {
           <Card
             cover={
               <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                alt="bg"
+                // src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                src={process.env.PUBLIC_URL + '/bg.jpg'}
+
               />
             }
             actions={[
